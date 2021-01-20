@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>滚动抽奖demo</title>
+    <style>
+        body,html{ height: 100%;}
+        body,html,div,p,ul,li{margin: 0;padding: 0;}
+        .rollbox{ 
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 700px;
+            height: 270px;
+            background:red;
+            overflow: hidden;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+        .rollbox:before,.rollbox:after{
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            background:blue;
+        }
+        .rollbox:before{
+            top: 0;
+            background: -webkit-linear-gradient(rgba(255,255,255,1),rgba(255,255,255,0));
+        }
+        .rollbox:after{
+            bottom: 0;
+            background: -webkit-linear-gradient(rgba(255,255,255,0),rgba(255,255,255,1));
+        }
+
+        .luckyBox{
+            width: 700px;
+            height: 100px;
+            position: relative;
+            margin-top:100px;
+            
+        }
+        .rolls{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .rolls li{
+            width: 100%;
+            height: 100%;
+            line-height: 100px;
+            list-style: none;
+            font-size: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .controls{
+            text-align: center;
+            position: fixed;
+            bottom: 20%;
+            left: 0;
+            width: 100%;
+        }
+        .controls button{
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="rollbox" id="rollbox">
+        <div class="luckyBox">
+            <ul class="rolls" id="rolls">
+            </ul>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="stop">stop</button>
+        <button id="start">start</button>
+    </div>
+    <input style = "width:200px;height:70px" type="textarea" id = 'att' value="智能颈椎按摩仪,智能颈椎按摩仪,飞科吹风机,飞科吹风机,+WIS+面膜,小米体脂称,小米体脂称,小米AI音箱,剃须刀,MAC/魅可口红,充电宝,充电宝,智能扫地机器人,天猫精灵"> 
+    <script type="text/javascript" src="luckDraw.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script>
+        aaa = $('#att').val();
+        var arr = aaa.split(',');
+        function update_sort(arr) {
+            var len = arr.length;
+            for (var i = 0; i < len - 1; i++) {
+                var index = parseInt(Math.random() * (len - i));
+                var temp = arr[index];
+                arr[index] = arr[len - i - 1];
+                arr[len - i - 1] = temp;
+            }
+            return arr; //结果不唯一
+        }
+        
+        var lucky = new Lucky(document.getElementById('rolls'),arr,{
+            childHeight: 100,
+            end: function (item) {
+                arr.splice($.inArray(item, arr),1);
+                console.log(arr.length)
+                update_sort(arr)
+                // console.log(arr)
+                $('#att').val(arr.toString())
+                alert('恭喜获得'+item);
+            }
+        });
+    
+        document.getElementById('start').addEventListener('click',function () {
+            lucky.start();
+        });
+
+        document.getElementById('stop').addEventListener('click',function () {
+            lucky.stop();
+        });
+    </script>
+</body>
+</html>

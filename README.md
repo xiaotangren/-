@@ -3,8 +3,6 @@
 
 用原生js实现的一个滚动抽奖的插件  
 
-实际效果见 [demo](http://lmaomaoz.com/luckDraw)  
-
 ---
 
 #### 使用方式：
