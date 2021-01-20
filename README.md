@@ -2,7 +2,7 @@
 滚动抽奖  
 
 用原生js实现的一个滚动抽奖的插件  
-![image](https://github.com/xiaotangren/luck-draw/demo.gif)
+![image](https://github.com/xiaotangren/luck-draw/blob/main/demo.gif)
 ---
 
 #### 使用方式：
