@@ -10,12 +10,12 @@
 ``` javascript
 
 let container = document.getElementById('rolls');
-let data = [1,2,3,4,5,6];
+let data = ['智能颈椎按摩仪','智能颈椎按摩仪','飞科吹风机','飞科吹风机','+WIS+面膜','小米体脂称','小米体脂称','小米AI音箱','剃须刀','MAC/魅可口红','充电宝','充电宝','智能扫地机器人','天猫精灵'];
 
 var lucky = new Lucky(container,data,{
     childHeight: 100,
     end: function (item) {
-        alert('恭喜'+item+'号同学中奖');
+        alert('恭喜获得'+item);
     }
 });
 
@@ -74,6 +74,3 @@ end|Function|null|抽奖结束后的回调函数
     text-align: center;
 }
 ```
-
-# -
-# -
